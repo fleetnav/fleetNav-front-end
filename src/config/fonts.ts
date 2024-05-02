@@ -1,11 +1,11 @@
-import { Fira_Code as FontMono, Inter as FontSans } from "next/font/google"
+import { Poppins, K2D } from "next/font/google";
 
-export const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-})
+export const subtitlesAndParagraph = Poppins({
+    subsets: ["latin"],
+    weight: ["500", "700", "900"],
+});
 
-export const fontMono = FontMono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-})
+export const titleFont = K2D({
+    subsets: ["latin"],
+    weight: ["500", "700", "800"],
+});
