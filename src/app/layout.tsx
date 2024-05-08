@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig, subtitlesAndParagraph } from "@/config";
-import { NextUiProvider } from "@/components";
+import { NextUiProvider, SideNav } from "@/components";
 
 import "./globals.css";
 
