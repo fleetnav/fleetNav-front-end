@@ -1,14 +1,14 @@
-interface UserRegister {
+interface UserRegisterInputs {
     name: string;
     email: string;
     password: string;
     phone: string;
 }
 
-interface DriverRegisterInputs extends UserRegister {
+interface DriverRegisterInputs extends UserRegisterInputs {
     driverLicense: string;
     referredLink: string;
     age: number;
 }
 
-export type RegisterForm = UserRegister | DriverRegisterInputs;
+export type RegisterForm = UserRegisterInputs | DriverRegisterInputs;

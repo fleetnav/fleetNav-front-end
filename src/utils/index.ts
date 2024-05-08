@@ -1,1 +1,1 @@
-export * from "./auth/inputsRegisterList";
+export * from "./auth/inputsAuth";

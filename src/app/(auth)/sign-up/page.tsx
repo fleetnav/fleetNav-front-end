@@ -8,7 +8,16 @@ export default function SignUpPage() {
         <div>
             <section className="h-dvh w-dvw flex">
                 <div className=" relative w-1/2 h-full">
-                    <Image src={"/images/auth/register.png"} fill alt="register image" className="object-cover" />
+                    <Image
+                        src={"/images/auth/register-photo.jpg"}
+                        fill
+                        alt="register image"
+                        className="object-cover object-right"
+                    />
+
+                    <div className="h-full absolute bottom-0 left-0 w-full z-10 bg-gradient-to-t from-primary-blue/60 to-transparent">
+                        {" "}
+                    </div>
                 </div>
 
                 <section className="w-1/2 h-full gap-8 flex flex-col justify-center items-center">

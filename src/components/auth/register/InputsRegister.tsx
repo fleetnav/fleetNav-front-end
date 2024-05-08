@@ -4,21 +4,31 @@ import { Input } from "@nextui-org/react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 import { RegisterForm } from "@/interfaces";
-import { inputsRegisterList } from "@/utils";
+
 import { useState } from "react";
+import { inputsRegisterList } from "@/utils";
 
 interface Props {
     register: UseFormRegister<RegisterForm>;
     errors: FieldErrors<RegisterForm>;
+    isOwner: boolean;
 }
 
-export const InputsRegister = ({ register, errors }: Props) => {
+export const InputsRegister = ({ register, errors, isOwner }: Props) => {
     const [isVisible, setIsVisible] = useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
 
+    const newList = () => {
+        if (isOwner) {
+            return inputsRegisterList.slice(0, 4);
+        }
+
+        return inputsRegisterList;
+    };
+
     return (
         <section className="flex flex-col w-full max-[600px]:  gap-4">
-            {inputsRegisterList.map((input) => (
+            {newList().map((input) => (
                 <div key={input.name} className="">
                     <Input
                         isRequired

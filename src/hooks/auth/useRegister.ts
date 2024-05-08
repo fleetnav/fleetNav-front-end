@@ -14,7 +14,8 @@ export const useRegister = () => {
     } = useForm<RegisterForm>();
 
     const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
-        const res = await signUp(data);
+        console.log(data);
+        // const res = await signUp(data);
 
         // if (!res.ok) {
         //     toast.error(res.message);
