@@ -35,7 +35,7 @@ export const inputsRegisterList: InputsData[] = [
         type: "number",
         name: "phone",
         label: "phone number",
-        icon: "icon-[ant-design--phone-out>ned]",
+        icon: "icon-[ant-design--phone-outned]",
         error: "* Phone number is required",
     },
     {
