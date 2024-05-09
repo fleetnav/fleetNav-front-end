@@ -46,9 +46,9 @@ const config: Config = {
                     colors: {
                         // Override default dark theme colors
                         primary: "#fff", // Example: Change primary color to a dark orange
-                        secondary: "#030303", // Example: Change accent color to a purple
+                        secondary: "#000", // Example: Change accent color to a purple
                         foreground: "#fefefe", // White text for readability
-                        background: "#19181d", // Dark background
+                        background: "#000", // Dark background
                     }, // dark theme colors
                 },
                 // ... custom themes

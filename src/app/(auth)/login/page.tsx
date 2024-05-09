@@ -2,6 +2,10 @@ import Image from "next/image";
 import { titleFont } from "../../../config/fonts";
 import { FormLogin } from "@/components";
 
+export const metadata = {
+    title: "login",
+    description: "login",
+};
 export default function LoginPage() {
     return (
         <section className="h-dvh w-dvw flex">
@@ -15,7 +19,7 @@ export default function LoginPage() {
 
             <section className="w-1/2 h-full gap-8 flex flex-col justify-center items-center">
                 <div className=" flex flex-col justify-center items-center">
-                    <h1 className={(titleFont.className, "text-6xl")}>Login</h1>
+                    <h1 className={`${titleFont.className} text-6xl`}>Login</h1>
                 </div>
 
                 <FormLogin />

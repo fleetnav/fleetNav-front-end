@@ -1,11 +1,12 @@
 "use client";
 
-import { Input } from "@nextui-org/react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { Input } from "@nextui-org/react";
+import { stagger, useAnimate } from "framer-motion";
+import { useEffect, useState } from "react";
 
 import { LoginForm } from "@/interfaces";
 import { inputsLoginList } from "@/utils";
-import { useState } from "react";
 
 interface Props {
     register: UseFormRegister<LoginForm>;
@@ -15,11 +16,18 @@ interface Props {
 export const InputsLogin = ({ register, errors }: Props) => {
     const [isVisible, setIsVisible] = useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
+    const [scope, animate] = useAnimate();
+
+    useEffect(() => {
+        animate(".motion", { opacity: [0, 1] }, { delay: stagger(0.1) });
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <section className="flex flex-col w-full max-[600px]:  gap-4">
+        <section ref={scope} className="flex flex-col w-full max-[600px]:  gap-4">
             {inputsLoginList.map((input) => (
-                <div key={input.name} className="">
+                <div key={input.name} className="motion">
                     <Input
                         isRequired
                         radius="sm"

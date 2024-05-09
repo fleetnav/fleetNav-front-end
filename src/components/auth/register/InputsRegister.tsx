@@ -2,34 +2,43 @@
 
 import { Input } from "@nextui-org/react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-
+import { stagger, useAnimate, motion } from "framer-motion";
 import { RegisterForm } from "@/interfaces";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { inputsRegisterList } from "@/utils";
 
 interface Props {
     register: UseFormRegister<RegisterForm>;
-    errors: FieldErrors<RegisterForm>;
-    isOwner: boolean;
+    errors: FieldErrors<any>;
+    isOwner: "owner" | "driver";
 }
 
+const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
 export const InputsRegister = ({ register, errors, isOwner }: Props) => {
     const [isVisible, setIsVisible] = useState(false);
+    const [scope, animate] = useAnimate();
+
     const toggleVisibility = () => setIsVisible(!isVisible);
 
     const newList = () => {
-        if (isOwner) {
+        if (isOwner === "owner") {
             return inputsRegisterList.slice(0, 4);
         }
 
         return inputsRegisterList;
     };
 
+    useEffect(() => {
+        animate(".motion", { opacity: [0, 1] }, { delay: stagger(0.1) });
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOwner]);
+
     return (
-        <section className="flex flex-col w-full max-[600px]:  gap-4">
+        <motion.section ref={scope} className="flex flex-col w-full max-[600px]:  gap-4">
             {newList().map((input) => (
-                <div key={input.name} className="">
+                <div key={input.name} className="motion">
                     <Input
                         isRequired
                         radius="sm"
@@ -57,12 +66,12 @@ export const InputsRegister = ({ register, errors, isOwner }: Props) => {
                             pattern: input.patter,
                         })}
                     />
-
+                    {/* eslint-disable-next-line react-hooks/exhaustive-deps */}
                     {(errors[input.name]?.type === "required" || errors[input.name]?.type === "pattern") && (
                         <span className="text-red-500 fade-in text-sm">{input.error}</span>
                     )}
                 </div>
             ))}
-        </section>
+        </motion.section>
     );
 };

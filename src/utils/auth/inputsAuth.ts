@@ -59,7 +59,7 @@ export const inputsRegisterList: InputsRegisterData[] = [
     },
 
     {
-        type: "number",
+        type: "text",
         name: "phone",
         label: "phone number",
         icon: "icon-[clarity--phone-handset-line]",
