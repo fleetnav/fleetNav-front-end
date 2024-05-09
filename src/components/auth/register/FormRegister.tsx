@@ -1,51 +1,48 @@
 "use client";
 
-import { Button, Link } from "@nextui-org/react";
-import { clsx } from "clsx";
+import { Button, Link, Tab, Tabs } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
 import { useRegister } from "@/hooks";
 import { InputsRegister } from "./InputsRegister";
 
+type Roles = "owner" | "driver";
+
 export const FormRegister = () => {
-    const [isOwner, setIsOwner] = useState(true);
+    const [selected, setSelected] = useState<Roles>("owner");
     const { errors, handleSubmit, onSubmit, register } = useRegister();
 
     return (
         <>
             <motion.form
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                animate={{ opacity: 1, transition: { delay: 0.1 } }}
                 onSubmit={handleSubmit(onSubmit)}
                 transition={{ duration: 0.2, ease: "easeInOut" }}
                 className="text-center w-[50%] flex flex-col gap-8 "
             >
                 <div className="flex gap-4 w-full items-center justify-center">
-                    <Button
-                        color="primary"
-                        className={clsx("text-black", {
-                            "text-white": !isOwner,
-                        })}
-                        variant={isOwner ? "solid" : "bordered"}
+                    <Tabs
                         size="lg"
-                        onClick={() => setIsOwner(true)}
-                    >
-                        OWNER
-                    </Button>
-                    <Button
                         color="primary"
-                        variant={isOwner ? "bordered" : "solid"}
-                        size="lg"
-                        className={clsx("text-black", {
-                            "text-white": isOwner,
-                        })}
-                        onClick={() => setIsOwner(false)}
+                        className="text-black"
+                        selectedKey={selected}
+                        onSelectionChange={(rol) => setSelected(rol as Roles)}
+                        classNames={{
+                            tabContent: "group-data-[selected=true]:text-[#000]",
+                        }}
+                        variant="light"
                     >
-                        DRIVER
-                    </Button>
+                        <Tab key="owner" title="OWNER" />
+                        <Tab key="driver" title="DRIVER" />
+                    </Tabs>
                 </div>
-                <InputsRegister isOwner={isOwner} register={register} errors={errors} />
+
+                <div className="h-[52vh]  overflow-y-scroll">
+                    <InputsRegister isOwner={selected} register={register} errors={errors} />
+                </div>
+
                 <Button
                     radius="sm"
                     size="lg"

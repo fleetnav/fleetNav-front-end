@@ -15,7 +15,7 @@ export const FormLogin = () => {
                 animate={{ opacity: 1 }}
                 onSubmit={handleSubmit(onSubmit)}
                 transition={{ duration: 0.2, ease: "easeInOut" }}
-                className="text-center w-[50%] flex flex-col gap-3 "
+                className="text-center w-[50%] flex flex-col gap-8 "
             >
                 <InputsLogin register={register} errors={errors} />
 
