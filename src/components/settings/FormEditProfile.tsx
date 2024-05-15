@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { motion } from "framer-motion";
 import { useFormEdit } from '@/hooks';
@@ -11,9 +12,9 @@ export const FormEditProfile = () => {
       animate={{ opacity: 1, transition: { delay: 0.1 } }}
       onSubmit={handleSubmit(onSubmit)}
       transition={{ duration: 0.2, ease: "easeInOut" }}
-      className="text-center w-full flex border border-yellow-500 gap-8 "
+      className="text-center w-full flex  gap-8 "
     >
-      <div className="h-full">
+      <div className="h-full w-full">
         <InputsFormEdit register={register} errors={errors}></InputsFormEdit>
       </div>
     </motion.form>

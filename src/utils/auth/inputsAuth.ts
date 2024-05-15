@@ -100,21 +100,21 @@ export  const inputsFormEditList: inputsFormEditData[] = [
     {
         type: "text",
         name: "name",
-        label: "name",
+        label: "Name",
         icon: "icon-[solar--user-broken]",
         error: "* Name is required",
     },
     {
         type: "email",
         name: "email",
-        label: "email",
+        label: "Email",
         icon: "icon-[mdi--email-outline]",
         error: "* Email is required",
     },
     {
         type: "password",
         name: "password",
-        label: "password",
+        label: "Password",
         icon: "icon-[mdi--lock-outline]",
         error: `* Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character`,
         patter: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
@@ -123,7 +123,7 @@ export  const inputsFormEditList: inputsFormEditData[] = [
     {
         type: "text",
         name: "phone",
-        label: "phone number",
+        label: "Phone number",
         icon: "icon-[clarity--phone-handset-line]",
         error: "* Phone number is required",
     },

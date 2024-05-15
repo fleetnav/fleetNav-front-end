@@ -1,38 +1,56 @@
-"use client"
+"use client";
 
-import { UserFormEdit } from "@/interfaces"
+import { UserFormEdit } from "@/interfaces";
 import { inputsFormEditList, inputsRegisterList } from "@/utils";
-import { Input} from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 import { motion, stagger, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form"
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface Props {
-  register : UseFormRegister<UserFormEdit>;
-  errors: FieldErrors<any>
+  register: UseFormRegister<UserFormEdit>;
+  errors: FieldErrors<any>;
 }
 
-export const InputsFormEdit = ({register , errors}: Props) => {
-  const [scope , animate] = useAnimate()
+export const InputsFormEdit = ({ register, errors }: Props) => {
+  const [scope, animate] = useAnimate();
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
-  useEffect(()=>{
-    animate(".motion", {opacity : [0,1]}, {delay : stagger(0.1)})
-  },[])
-  const listInputs = inputsFormEditList
+  useEffect(() => {
+    animate(".motion", { opacity: [0, 1] }, { delay: stagger(0.1) });
+  }, []);
+  const listInputs = inputsFormEditList;
   return (
     <motion.section
       ref={scope}
-      className="flex w-full border border-yellow-400"
+      className="grid grid-rows-2 grid-flow-col w-full  gap-x-10 gap-y-12 py-16"
     >
       {listInputs.map((input) => (
-        <div key={input.name} className="motion">
+        <div key={input.name} className="motion  w-full ">
           <Input
-            isRequired
             radius="sm"
+            label={input.label}
             variant="bordered"
+            labelPlacement="outside"
             classNames={{
-              inputWrapper: "border-white/60",
+              label: ["text-white/50 ", "text-xl", "!left-4", "!top-[8%]"],
+
+              input: [
+                "text-white/90 ",
+                "placeholder:text-red-700/50 ",
+                "!h-full",
+              ],
+              innerWrapper: ["!h-full"],
+              inputWrapper: [
+                "border",
+                "border-white/30",
+
+                "group-data-[focus=true]:bg-white/5",
+
+                "!cursor-text",
+                "!h-full",
+              ],
+              base: "h-24",
             }}
             startContent={
               <i className={`${input.icon}`} role="img" aria-hidden="true" />
@@ -61,7 +79,6 @@ export const InputsFormEdit = ({register , errors}: Props) => {
               )
             }
             size="md"
-            label={input.label}
             type={
               input.type === "password"
                 ? isVisible
@@ -70,17 +87,12 @@ export const InputsFormEdit = ({register , errors}: Props) => {
                 : input.type
             }
             {...register(input.name, {
-              required: true,
+              required: false,
               pattern: input.patter,
             })}
           />
-          {/* eslint-disable-next-line react-hooks/exhaustive-deps */}
-          {(errors[input.name]?.type === "required" ||
-            errors[input.name]?.type === "pattern") && (
-            <span className="text-red-500 fade-in text-sm">{input.error}</span>
-          )}
         </div>
       ))}
     </motion.section>
   );
-}
+};

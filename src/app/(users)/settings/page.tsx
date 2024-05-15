@@ -6,7 +6,7 @@ export const metadata = {
 };
 export default function SettingsPage() {
   return (
-    <section className="h-full w-dvh border border-red-400 p-16">
+    <section className="h-full w-dvh  p-16">
       <div>
         <h2 className="text-3xl">Settings</h2>
         <div className="flex items-center my-5">
