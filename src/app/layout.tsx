@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig, subtitlesAndParagraph } from "@/config";
-import { NextUiProvider, SideNav } from "@/components";
+import { NextUiProvider } from "@/components";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 
@@ -23,7 +24,10 @@ export default function RootLayout({
     return (
         <html lang="en" className="dark">
             <body className={subtitlesAndParagraph.className}>
-                <NextUiProvider>{children}</NextUiProvider>
+                <NextUiProvider>
+                    <Toaster />
+                    {children}
+                </NextUiProvider>
             </body>
         </html>
     );

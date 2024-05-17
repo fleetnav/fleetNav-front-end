@@ -1,2 +1,2 @@
-export * from "./auth/register-form.interface";
-export * from "./auth/login-form.interface";
+export * from "./auth/forms.interface";
+export * from "./auth/services-response.interface";

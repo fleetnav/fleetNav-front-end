@@ -1,10 +1,15 @@
 "use client";
 
 import { RegisterForm } from "@/interfaces";
+import { AuthService } from "@/services";
 import { useAuthStore } from "@/store";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export const useRegister = () => {
+    const router = useRouter();
+
     const signUp = useAuthStore((state) => state.signUp);
 
     const {
@@ -13,19 +18,16 @@ export const useRegister = () => {
         formState: { errors },
     } = useForm<RegisterForm>();
 
-    const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
-        console.log(data);
-        // const res = await signUp(data);
+    const onSubmit: SubmitHandler<RegisterForm> = async (formData) => {
+        const authService = new AuthService();
 
-        // if (!res.ok) {
-        //     toast.error(res.message);
-        //     return;
-        // }
-        // await login(email.toLowerCase(), password);
-        // toast.success("Usuario creado con exito");
-        // setTimeout(() => {
-        //     window.location.replace("/dashboard");
-        // }, 2000);
+        const data = await authService.registerUser(formData);
+
+        if (data.status === 201) {
+            toast.success("Account created successful!");
+
+            router.push("login");
+        }
     };
     return {
         register,

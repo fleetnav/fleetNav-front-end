@@ -55,15 +55,15 @@ export const inputsRegisterList: InputsRegisterData[] = [
         label: "password",
         icon: "icon-[mdi--lock-outline]",
         error: `* Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character`,
-        patter: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
     },
 
     {
-        type: "text",
+        type: "number",
         name: "phone",
         label: "phone number",
         icon: "icon-[clarity--phone-handset-line]",
-        error: "* Phone number is required",
+        error: "* Phone most be  longer than 10 characters",
+        patter: /\d{10,}/,
     },
     {
         type: "number",
