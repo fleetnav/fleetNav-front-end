@@ -6,6 +6,14 @@ interface InputsRegisterData {
     error?: string;
     patter?: RegExp;
 }
+interface inputsFormEditData {
+    type: "text" | "email" | "password" | "number";
+    name: "name" | "email" | "password" | "phone" ;
+    icon: string;
+    label?: string;
+    error?: string;
+    patter?: RegExp;
+}
 
 interface InputsLoginData {
     type: "email" | "password";
@@ -86,4 +94,37 @@ export const inputsRegisterList: InputsRegisterData[] = [
         icon: "icon-[bi--calendar2-event]",
         error: `* Referral code is required`,
     },
+
 ];
+export  const inputsFormEditList: inputsFormEditData[] = [
+    {
+        type: "text",
+        name: "name",
+        label: "Name",
+        icon: "icon-[solar--user-broken]",
+        error: "* Name is required",
+    },
+    {
+        type: "email",
+        name: "email",
+        label: "Email",
+        icon: "icon-[mdi--email-outline]",
+        error: "* Email is required",
+    },
+    {
+        type: "password",
+        name: "password",
+        label: "Password",
+        icon: "icon-[mdi--lock-outline]",
+        error: `* Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character`,
+        patter: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
+    },
+
+    {
+        type: "text",
+        name: "phone",
+        label: "Phone number",
+        icon: "icon-[clarity--phone-handset-line]",
+        error: "* Phone number is required",
+    },
+]
