@@ -19,10 +19,6 @@ export const useRegister = () => {
     } = useForm<RegisterForm>();
 
     const onSubmit: SubmitHandler<RegisterForm> = async (formData) => {
-        const authService = new AuthService();
-
-        const data = await authService.registerUser(formData);
-
         if (data.status === 201) {
             toast.success("Account created successful!");
 
