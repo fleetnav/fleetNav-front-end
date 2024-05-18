@@ -23,7 +23,7 @@ export const InputsFormEdit = ({ register, errors }: Props) => {
   return (
     <motion.section
       ref={scope}
-      className="grid grid-rows-2 grid-flow-col w-full  gap-x-10 gap-y-12 py-16"
+      className="grid grid-rows-2 grid-flow-col w-full  gap-x-10 gap-y-12 pt-16"
     >
       {listInputs.map((input) => (
         <div key={input.name} className="motion  w-full ">
