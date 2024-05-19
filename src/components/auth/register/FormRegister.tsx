@@ -11,7 +11,7 @@ type Roles = "owner" | "driver";
 
 export const FormRegister = () => {
     const [selected, setSelected] = useState<Roles>("owner");
-    const { errors, handleSubmit, onSubmit, register } = useRegister();
+    const { errors, handleSubmit, onSubmit, register } = useRegister({ rol: selected });
 
     return (
         <>
@@ -20,7 +20,7 @@ export const FormRegister = () => {
                 animate={{ opacity: 1, transition: { delay: 0.1 } }}
                 onSubmit={handleSubmit(onSubmit)}
                 transition={{ duration: 0.2, ease: "easeInOut" }}
-                className="text-center w-[50%] flex flex-col gap-8 "
+                className="text-center max-h-[78dvh]  w-[50%] flex flex-col gap-8 "
             >
                 <div className="flex gap-4 w-full items-center justify-center">
                     <Tabs
@@ -39,7 +39,7 @@ export const FormRegister = () => {
                     </Tabs>
                 </div>
 
-                <div className="h-[52vh]  overflow-y-scroll">
+                <div className="h-[52vh]  overflow-y-auto">
                     <InputsRegister isOwner={selected} register={register} errors={errors} />
                 </div>
 
@@ -48,7 +48,7 @@ export const FormRegister = () => {
                     size="lg"
                     type="submit"
                     color="primary"
-                    className="text-primary-blue text-xl font-semibold"
+                    className="text-primary-blue text-lg font-semibold"
                 >
                     Sign-in
                 </Button>

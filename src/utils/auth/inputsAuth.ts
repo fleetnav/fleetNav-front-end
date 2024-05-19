@@ -30,7 +30,7 @@ export const inputsLoginList: InputsLoginData[] = [
         label: "password",
         icon: "icon-[mdi--lock-outline]",
         error: `* Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character`,
-        patter: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
+        // patter: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
     },
 ];
 

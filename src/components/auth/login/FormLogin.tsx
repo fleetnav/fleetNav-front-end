@@ -9,7 +9,6 @@ import { useState } from "react";
 type Roles = "owner" | "driver";
 
 export const FormLogin = () => {
-    const [selected, setSelected] = useState<Roles>("owner");
     const { register, errors, handleSubmit, onSubmit } = useLogin();
 
     return (
@@ -21,22 +20,6 @@ export const FormLogin = () => {
                 transition={{ duration: 0.2, ease: "easeInOut" }}
                 className="text-center w-[50%] flex flex-col gap-8 "
             >
-                <div className="flex gap-4 w-full items-center justify-center">
-                    <Tabs
-                        size="lg"
-                        color="primary"
-                        className="text-black"
-                        selectedKey={selected}
-                        onSelectionChange={(rol) => setSelected(rol as Roles)}
-                        classNames={{
-                            tabContent: "group-data-[selected=true]:text-[#000]",
-                        }}
-                        variant="light"
-                    >
-                        <Tab key="owner" title="OWNER" />
-                        <Tab key="driver" title="DRIVER" />
-                    </Tabs>
-                </div>
                 <InputsLogin register={register} errors={errors} />
 
                 <Button
@@ -57,6 +40,7 @@ export const FormLogin = () => {
                 </div>
 
                 <div>
+                    d
                     <span>
                         don&apos;t have an account ?{" "}
                         <Link href="/sign-up" underline="always">

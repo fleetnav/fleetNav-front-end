@@ -1,6 +1,13 @@
-import { LoginResponse, RegisterForm, RegisterResponse } from "@/interfaces";
+import { LoginResponse, RegisterForm, RegisterResponse, User } from "@/interfaces";
 import { instacheAuth } from "@/lib";
-import axios, { AxiosError } from "axios";
+
+interface HttpError extends Error {
+    response?: {
+        data?: {
+            message: string;
+        };
+    };
+}
 
 export class AuthService {
     private token;
@@ -24,13 +31,14 @@ export class AuthService {
                 status,
             };
         } catch (error: unknown) {
+            console.log(error);
             throw new Error("error creating user");
         }
     }
 
     async loginUser(email: string, password: string): Promise<{ data: LoginResponse; status: number }> {
         try {
-            const { data, status } = await instacheAuth.post<LoginResponse>("auth/login/owner", {
+            const { data, status } = await instacheAuth.post<LoginResponse>("auth/login", {
                 email,
                 password,
             });
@@ -38,8 +46,38 @@ export class AuthService {
                 data,
                 status,
             };
-        } catch (error) {
-            throw new Error("error creating user");
+        } catch (error: unknown) {
+            const httpError = error as HttpError;
+            if (httpError.response?.data?.message) {
+                throw new Error(httpError.response.data.message);
+            }
+            throw new Error("An unexpected error occurred");
+        }
+    }
+
+    async getUserById(id: string): Promise<{ status: number; msg: string }> {
+        try {
+            const data = await fetch(`${process.env.NEXT_PUBLIC_AUTH_SERVICE_URL}/owner/${id}`).then((res) =>
+                res.json()
+            );
+
+            if (data.statusCode) {
+                return {
+                    status: 404,
+                    msg: "not found",
+                };
+            }
+
+            return {
+                status: 200,
+                msg: "everything is ok",
+            };
+        } catch (error: unknown) {
+            console.log(error);
+            return {
+                status: 404,
+                msg: "not found",
+            };
         }
     }
 }

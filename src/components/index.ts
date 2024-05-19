@@ -6,4 +6,4 @@ export * from "./auth/login/FormLogin";
 
 // ui
 
-export * from "./ui/SideNav";
+export * from "./ui/side-nav/SideNav";
