@@ -11,3 +11,4 @@ export * from "./ui/SideNav";
 //Settings
 export * from "./settings/FormEditProfile"
 export * from "./settings/InputsFormEdit"
+export * from "./settings/SelectAvatar"
