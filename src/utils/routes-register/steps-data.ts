@@ -8,7 +8,7 @@ export interface FieldStep {
     label: string;
     name: string;
     icon: string;
-    type: "text" | "number" | "email" | "password" | "select" | "file";
+    type: "text" | "number" | "email" | "password" | "select" | "file" | "time" | "date";
     required?: boolean;
 }
 
@@ -25,7 +25,7 @@ export const STEPS: Steps[] = [
                 icon: "",
             },
             {
-                label: "time",
+                label: "avg time",
                 name: "averageTime",
                 type: "number",
                 required: true,
@@ -87,7 +87,7 @@ export const STEPS: Steps[] = [
         fields: [
             {
                 label: "name",
-                name: "name",
+                name: "stopName",
                 type: "text",
                 required: true,
                 icon: "",
@@ -101,8 +101,8 @@ export const STEPS: Steps[] = [
             },
             {
                 label: "time",
-                name: "text",
-                type: "number",
+                name: "timeStop",
+                type: "text",
                 required: true,
                 icon: "",
             },

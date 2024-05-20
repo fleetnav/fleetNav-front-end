@@ -9,6 +9,7 @@ interface UserRegisterInputs {
     password: string;
     phone: number;
     number_buses?: number;
+    role: "owner" | "driver";
 }
 
 interface DriverRegisterInputs extends UserRegisterInputs {

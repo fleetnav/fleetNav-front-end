@@ -1,12 +1,12 @@
-"user client";
+"use client";
 import React, { Dispatch, SetStateAction } from "react";
-import { Controller } from "react-hook-form";
-import { Input, Select } from "@nextui-org/react";
+import { Controller, FieldError } from "react-hook-form";
+import { Input, Select, SelectItem, TimeInput } from "@nextui-org/react";
 
 export interface Props {
     name: string;
     control: any;
-    type: "text" | "number" | "email" | "password" | "select" | "file";
+    type: "text" | "number" | "email" | "password" | "select" | "file" | "time" | "date";
     placeholder: string;
     required: boolean;
     children?: any;
@@ -30,17 +30,15 @@ export const InputController = ({
     setSubmitBtnPressed,
     defaultValue,
 }: Props) => {
-    const [isVisible, setIsVisible] = React.useState(false);
-
-    return (
-        <Controller
-            key={name}
-            name={name}
-            control={control}
-            defaultValue={defaultValue || ""}
-            rules={{ required }}
-            render={({ field: { onChange, value }, fieldState: { error } }) =>
-                type === "select" ? (
+    const renderInput = (
+        type: Props["type"],
+        error: FieldError | undefined,
+        onChange: (...event: any[]) => void,
+        value: any
+    ) => {
+        switch (type) {
+            case "select":
+                return (
                     <>
                         <Select
                             onOpenChange={() => {
@@ -53,36 +51,44 @@ export const InputController = ({
                             onChange={onChange}
                             selectedKeys={[value]}
                             label={label}
+                            size="lg"
+                            radius="sm"
+                            // items={items}
                             variant={variant}
                             defaultSelectedKeys={defaultSelectedKeys}
                             classNames={{
-                                value: ["text-black"],
-                                trigger: ["border-black"],
-                                mainWrapper: ["border-black"],
+                                value: ["text-white"],
+                                trigger: ["border-white/60"],
+                                mainWrapper: ["border-white/60"],
                             }}
                         >
                             {children}
                         </Select>
                     </>
-                ) : type === "password" ? (
+                );
+            case "time":
+                return (
                     <>
-                        <Input
-                            classNames={{
-                                input: "flex items-center bg-transparent border-none",
-                                inputWrapper: ["border-black"],
-                            }}
-                            variant={variant}
+                        <TimeInput
                             label={label}
+                            classNames={{
+                                inputWrapper: "border-white/60",
+                            }}
                             value={value}
+                            size="lg"
                             onChange={onChange}
-                            isInvalid={error ? true : false}
-                            errorMessage={error?.message}
-                            type={isVisible ? "text" : "password"}
+                            variant={variant}
+                            radius="sm"
+                            granularity="minute"
                         />
                     </>
-                ) : (
+                );
+
+            default:
+                return (
                     <>
                         <Input
+                            size="lg"
                             classNames={{
                                 inputWrapper: "border-white/60",
                             }}
@@ -97,7 +103,19 @@ export const InputController = ({
                             placeholder={placeholder}
                         />
                     </>
-                )
+                );
+        }
+    };
+
+    return (
+        <Controller
+            key={name}
+            name={name}
+            control={control}
+            defaultValue={defaultValue || ""}
+            rules={{ required }}
+            render={({ field: { onChange, value }, fieldState: { error } }) =>
+                renderInput(type, error, onChange, value)
             }
         />
     );

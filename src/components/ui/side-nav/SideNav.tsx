@@ -1,11 +1,18 @@
+"use server";
 import Link from "next/link";
 
 import { siteConfig } from "@/config";
 import { Button, Image } from "@nextui-org/react";
 import { LogoutButton } from "./LogoutButton";
 import { ProfileInfo } from "./ProfileInfo";
+import { cookies } from "next/headers";
+import { StateCookie } from "@/middleware";
 
 export const SideNav = () => {
+    const cookieStore = cookies();
+    const state = cookieStore.get("auth-store")?.value;
+    const parsedCookie: { state: StateCookie } = JSON.parse(state ?? "{}");
+
     return (
         <aside className="w-1/5 max-w-[280px] flex flex-col px-10 py-12 items-center justify-around gap-8 h-screen min-h-svh border-r border-red-500/35">
             {/* logo */}
@@ -15,7 +22,7 @@ export const SideNav = () => {
             </div>
 
             {/* profile info */}
-            <ProfileInfo />
+            <ProfileInfo user={parsedCookie.state.user} />
 
             {/*  nav links */}
             <div className="flex w-full flex-col flex-1 gap-4 ">

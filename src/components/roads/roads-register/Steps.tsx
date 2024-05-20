@@ -1,7 +1,5 @@
 import { STEPS } from "@/utils";
 
-import clsx from "clsx";
-
 interface Props {
     currentStep: number;
 }

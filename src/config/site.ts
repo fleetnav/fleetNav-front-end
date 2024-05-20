@@ -11,13 +11,18 @@ export const siteConfig = {
         },
         {
             label: "Trucks",
-            href: "/projects",
+            href: "/trucks",
             icon: "icon-[mdi--truck-outline]",
         },
         {
             label: "Routes",
             href: "/routes",
             icon: "icon-[material-symbols--location-on-outline]",
+        },
+        {
+            label: "Trips",
+            href: "/trips",
+            icon: "icon-[bx--trip]",
         },
         {
             label: "Chat",

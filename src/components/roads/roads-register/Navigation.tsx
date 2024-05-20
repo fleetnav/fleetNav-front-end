@@ -1,48 +1,35 @@
+"use client";
+import { RouteFormInput } from "@/interfaces";
 import { STEPS } from "@/utils";
 import { Button } from "@nextui-org/react";
 import clsx from "clsx";
 import { Dispatch, SetStateAction } from "react";
-import { Inputs } from "../RoadsPage";
+
 import { UseFormTrigger } from "react-hook-form";
 
 interface Props {
     isLoading: boolean;
     currentStep: number;
-    setPreviousStep: Dispatch<SetStateAction<number>>;
     setCurrentStep: Dispatch<SetStateAction<number>>;
     onSubmit: () => Promise<void>;
-    trigger: UseFormTrigger<Inputs>;
+    trigger: UseFormTrigger<RouteFormInput>;
     children: React.ReactNode;
 }
-
-export const Navigation = ({
-    isLoading,
-    currentStep,
-    setCurrentStep,
-    setPreviousStep,
-    onSubmit,
-    trigger,
-    children,
-}: Props) => {
+type FieldName = keyof RouteFormInput;
+export const Navigation = ({ isLoading, currentStep, setCurrentStep, onSubmit, trigger, children }: Props) => {
     const prev = () => {
         if (currentStep > 0) {
-            setPreviousStep(currentStep);
-            setCurrentStep((step) => step - 1);
+            setCurrentStep((step) => (step ? step - 1 : 0));
         }
     };
-    type FieldName = keyof Inputs;
 
     const next = async () => {
-        const fields = STEPS[currentStep].fields.name;
+        const fields = STEPS[currentStep].fields.map((field) => field.name);
         const output = await trigger(fields as FieldName[], { shouldFocus: true });
 
         if (!output) return;
 
         if (currentStep < STEPS.length - 1) {
-            //   if (currentStep === STEPS.length -mileage 2) {
-            //     await handleSubmit(processForm)();
-            //   }
-            setPreviousStep(currentStep);
             setCurrentStep((step) => step + 1);
         }
     };
@@ -79,6 +66,7 @@ export const Navigation = ({
                 <Button
                     isLoading={isLoading}
                     onClick={onSubmit}
+                    type="submit"
                     className={clsx(
                         "hidden w-40 px-2 py-1 text-sm font-semibold text-black bg-white ring-inset disabled:cursor-not-allowed disabled:opacity-50 shadow-sm hover:shadow-md active:shadow-inner",
                         {

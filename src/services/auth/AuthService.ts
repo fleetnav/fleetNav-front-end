@@ -18,9 +18,16 @@ export class AuthService {
         this.user = user;
     }
 
-    async registerUser(formData: RegisterForm): Promise<{ data: RegisterResponse; status: number }> {
-        formData["number_buses"] = 0;
+    async registerUser(
+        formData: RegisterForm,
+        rol: "owner" | "driver"
+    ): Promise<{ data: RegisterResponse; status: number }> {
         formData["phone"] = Number(formData.phone);
+        formData["role"] = rol;
+
+        if (rol === "owner") {
+            formData["number_buses"] = 0;
+        }
 
         try {
             const { data, status } = await instacheAuth.post<RegisterResponse>("auth/register/owner", {

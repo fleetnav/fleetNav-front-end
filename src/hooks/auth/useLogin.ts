@@ -1,3 +1,4 @@
+"use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { LoginForm } from "@/interfaces";

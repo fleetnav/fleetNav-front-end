@@ -21,16 +21,16 @@ export const useRegister = ({ rol }: Props) => {
     } = useForm<RegisterForm>();
 
     const onSubmit: SubmitHandler<RegisterForm> = async (formData) => {
-        try {
-            const { status } = await signUp(formData, rol);
-
-            if (status === 201) {
-                toast.success("Account created successful!");
-                router.push("/dashboard");
-            }
-        } catch (error) {
-            toast.error("Error creating account");
-        }
+        toast.promise(signUp(formData, rol), {
+            loading: "Loading...",
+            success: ({ status, data }) => {
+                if (status === 201) {
+                    router.push("/dashboard");
+                    return `successful registration ${data?.user.name}!`;
+                }
+            },
+            error: (error) => toast.error(error?.message),
+        });
     };
     return {
         register,

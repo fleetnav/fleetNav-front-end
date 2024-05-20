@@ -38,11 +38,11 @@ const store: StateCreator<State> = (set, get) => ({
         const authService = new AuthService();
         const tenantService = new TenantService();
 
-        const { data, status } = await authService.registerUser(formdata);
+        const { data, status } = await authService.registerUser(formdata, rol);
 
         if (status === 201 && rol === "owner") {
             try {
-                const res = await tenantService.createTenant(data.user._id, data.token);
+                await tenantService.createTenant(data.user._id, data.token);
             } catch (error) {
                 throw new Error("Error creating tenant");
             }

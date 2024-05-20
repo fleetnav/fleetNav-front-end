@@ -1,4 +1,5 @@
 "use client";
+
 import { Control } from "react-hook-form";
 
 import { InputController } from "../../../ui/inputController/InputController";
@@ -9,9 +10,9 @@ interface Props {
     currentStep: number;
     register: Control<RouteFormInput>;
 }
-export const SecondStep = ({ currentStep, register }: Props) => {
+export const ThirdStep = ({ currentStep, register }: Props) => {
     return (
-        <div className="grid grid-cols-2 place-content-center min-h-[40dvh]   p-6 h-full w-full gap-12  ">
+        <div className="grid grid-cols-2 place-content-center  min-h-[40dvh] p-6 h-full gap-12 w-full  ">
             {STEPS[currentStep].fields.map(({ name, label, icon, type }: FieldStep) => (
                 <InputController
                     name={name}

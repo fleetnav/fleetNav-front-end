@@ -39,8 +39,6 @@ instaceMultitenant.interceptors.request.use((config) => {
     const token = useAuthStore.getState().token;
     const user = useAuthStore.getState().user;
 
-    console.log({ token });
-
     if (token && user) {
         config.headers["Authorization"] = `Bearer ${token}`;
         config.url = `${user._id}/${config.url}`;
