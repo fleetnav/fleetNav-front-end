@@ -14,3 +14,8 @@ export * from "./trucks/TrucksPage";
 
 // trips
 export * from "./trips/TripsPage";
+
+//Settings
+export * from "./settings/FormEditProfile";
+export * from "./settings/InputsFormEdit";
+export * from "./settings/SelectAvatar";
