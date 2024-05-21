@@ -1,12 +1,13 @@
-export const metadata = {
-    title: "SEO Title",
-    description: "SEO Title",
-};
+import { SideNav } from "@/components";
+
 export default function UsersLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div>
-            <h1>Hello Root and MetaData</h1>
-            <div>{children}</div>
+        <div className="flex h-screen w-screen min-h-svh bg-primary-blue">
+            <SideNav />
+
+            <section className="py-16 px-8 w-full">
+                <div className="w-full h-full rounded-lg">{children}</div>
+            </section>
         </div>
     );
 }

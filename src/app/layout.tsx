@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { siteConfig } from "@/config";
-import { Providers } from "@/components";
+import { siteConfig, subtitlesAndParagraph } from "@/config";
+import { NextUiProvider } from "@/components";
+import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
 
 export const metadata: Metadata = {
     title: {
@@ -23,9 +22,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={inter.className}>
-                <Providers>{children}</Providers>
+        <html lang="en" className="dark">
+            <body className={subtitlesAndParagraph.className}>
+                <NextUiProvider>
+                    <Toaster />
+                    {children}
+                </NextUiProvider>
             </body>
         </html>
     );
