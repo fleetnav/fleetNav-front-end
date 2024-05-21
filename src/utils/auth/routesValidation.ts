@@ -28,7 +28,7 @@ export const handlePublicRouteAccess = async (
         const authServ = new AuthService();
 
         try {
-            const user = await authServ.getUserById(payload.id);
+            const user = await authServ.getUserById(payload.id, payload.role);
             if (user) {
                 return nextResponse.redirect(new URL("/dashboard", request.url));
             }

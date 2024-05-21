@@ -1,18 +1,16 @@
 "use client";
 
-import { RegisterForm } from "@/interfaces";
+import { RegisterForm, UserFormEdit } from "@/interfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export const useFormEdit = () => {
-    
-
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<RegisterForm>();
+    } = useForm<UserFormEdit>();
 
-    const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
+    const onSubmit: SubmitHandler<UserFormEdit> = async (data) => {
         console.log(data);
         // const res = await signUp(data);
 
