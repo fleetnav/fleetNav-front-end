@@ -17,11 +17,13 @@ export async function middleware(request: NextRequest) {
     const isPublicRoute = publicRoutes?.includes(pathname);
     const parsedCookie: { state: StateCookie } = JSON.parse(authCookie ?? "{}");
 
-    if (Object.keys(parsedCookie)?.length === 0 && isPrivateRoute) {
+    if (Object.keys(parsedCookie)?.length === 0 || (Object.keys(parsedCookie?.state)?.length === 0 && isPrivateRoute)) {
         return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    if (parsedCookie.state?.token && isPrivateRoute) {
+    if (parsedCookie?.state?.token && isPrivateRoute) {
+        console.log(parsedCookie.state?.token);
+        console.log("hola");
         const { payload }: DecodedJWT = decodeJWT(parsedCookie.state.token);
 
         const authServ = new AuthService();
@@ -33,6 +35,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/login", request.url));
     }
     if (parsedCookie?.state?.token && isPublicRoute) {
+        console.log("hola public");
         const { payload }: DecodedJWT = decodeJWT(parsedCookie?.state.token);
 
         const authServ = new AuthService();
