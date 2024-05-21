@@ -1,4 +1,4 @@
-import { RegisterForm, RegisterResponse, User } from "@/interfaces";
+import type { RegisterForm, RegisterResponse, User } from "@/interfaces";
 import { AuthService, TenantService } from "@/services";
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";

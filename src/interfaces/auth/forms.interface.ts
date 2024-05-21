@@ -10,12 +10,11 @@ interface UserRegisterInputs {
     phone: number;
     number_buses?: number;
     role: "owner" | "driver";
+    avatarNumber: number;
+    license?: number;
+    id_owner?: string;
+    age?: number;
+    status: "active" | "inactive";
 }
 
-interface DriverRegisterInputs extends UserRegisterInputs {
-    driverLicense: string;
-    referredLink: string;
-    age: number;
-}
-
-export type RegisterForm = UserRegisterInputs | DriverRegisterInputs;
+export type RegisterForm = UserRegisterInputs;

@@ -14,7 +14,7 @@ export const SideNav = () => {
     const parsedCookie: { state: StateCookie } = JSON.parse(state ?? "{}");
 
     return (
-        <aside className="w-1/5 max-w-[280px] flex flex-col px-10 py-12 items-center justify-around gap-8 h-screen min-h-svh border-r border-red-500/35">
+        <aside className="w-1/5 max-w-[280px] flex flex-col px-10 py-12 items-center justify-around gap-8 h-screen min-h-screen border-r border-red-500/35">
             {/* logo */}
             <div className="flex gap-4 w-full  justify-self-start items-center">
                 <Image src={"/images/brand/logo-test.png"} width={50} height={50} alt="fleetNav logo" />
@@ -25,7 +25,7 @@ export const SideNav = () => {
             <ProfileInfo user={parsedCookie.state.user} />
 
             {/*  nav links */}
-            <div className="flex w-full flex-col flex-1 gap-4 ">
+            <div className="flex w-full h-full overflow-y-scroll flex-col flex-1 gap-4 ">
                 {siteConfig.navMenuItems.map((item) => (
                     <Link key={item.href} className="flex " href={item.href}>
                         <Button

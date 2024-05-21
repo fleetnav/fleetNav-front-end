@@ -2,10 +2,11 @@
 
 import { RegisterForm } from "@/interfaces";
 
-import { useAuthStore } from "@/store";
+import { useAuthStore, useChatStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useStompProvider } from "../chat/useStompProvider";
 
 interface Props {
     rol: "owner" | "driver";
@@ -13,6 +14,7 @@ interface Props {
 export const useRegister = ({ rol }: Props) => {
     const router = useRouter();
     const signUp = useAuthStore((state) => state.signUp);
+    const connect = useChatStore((state) => state.connect);
 
     const {
         register,
@@ -24,6 +26,7 @@ export const useRegister = ({ rol }: Props) => {
         toast.promise(signUp(formData, rol), {
             loading: "Loading...",
             success: ({ status, data }) => {
+                connect(data.user.email, data.user.name, data.user).then();
                 if (status === 201) {
                     router.push("/dashboard");
                     return `successful registration ${data?.user.name}!`;

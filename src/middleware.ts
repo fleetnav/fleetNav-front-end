@@ -23,8 +23,10 @@ export async function middleware(request: NextRequest) {
 
     if (parsedCookie.state?.token && isPrivateRoute) {
         const { payload }: DecodedJWT = decodeJWT(parsedCookie.state.token);
+
         const authServ = new AuthService();
-        const { status } = await authServ.getUserById(payload.id);
+        const { status } = await authServ.getUserById(payload.id, payload.role);
+
         if (status === 200 && isPrivateRoute) {
             return;
         }
@@ -32,8 +34,10 @@ export async function middleware(request: NextRequest) {
     }
     if (parsedCookie?.state?.token && isPublicRoute) {
         const { payload }: DecodedJWT = decodeJWT(parsedCookie?.state.token);
+
         const authServ = new AuthService();
-        const { status } = await authServ.getUserById(payload.id);
+        const { status } = await authServ.getUserById(payload.id, payload.role);
+
         if (status === 404) {
             return;
         }

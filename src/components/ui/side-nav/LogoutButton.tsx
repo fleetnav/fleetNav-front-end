@@ -1,15 +1,17 @@
 "use client";
-import { useAuthStore } from "@/store";
+import { useAuthStore, useChatStore } from "@/store";
 import { Button } from "@nextui-org/react";
 
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export const LogoutButton = () => {
+    const disconnect = useChatStore((state) => state.disconnect);
     const logout = useAuthStore((state) => state.logOut);
     const router = useRouter();
 
     const handleLogout = () => {
+        disconnect();
         logout();
         toast.message("goodbye!");
         router.push("/login");

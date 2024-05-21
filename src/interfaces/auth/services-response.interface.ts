@@ -3,18 +3,6 @@ export interface RegisterResponse {
     token: string;
 }
 
-export interface User {
-    name: string;
-    email: string;
-    password: string;
-    phone: number;
-    number_buses: number;
-    _id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
-}
-
 export interface LoginResponse {
     user: User;
     token: string;
@@ -26,7 +14,15 @@ export interface User {
     email: string;
     password: string;
     phone: number;
-    number_buses: number;
+    role: string;
+    avatarNumber: number;
+
+    license?: number;
+    age?: number;
+    id_owner?: string;
+
+    number_buses?: number;
+
     createdAt: Date;
     updatedAt: Date;
     __v: number;

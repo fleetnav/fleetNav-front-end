@@ -14,9 +14,6 @@ interface Props {
 export const TripForm = ({ routesData, vehiclesData }: Props) => {
     const { control, onSubmit, isLoading } = useTripForm();
 
-    console.log(routesData);
-    console.log(vehiclesData);
-
     return (
         <section className="grid grid-cols-2 gap-8 justify-center items-center">
             {tripFields.slice(0, 3).map(({ name, label, icon, type }: FieldStep) => (

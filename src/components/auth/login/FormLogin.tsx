@@ -42,7 +42,7 @@ export const FormLogin = () => {
                 <div>
                     d
                     <span>
-                        don&apos;t have an account ?{" "}
+                        on&apos;t have an account ?{" "}
                         <Link href="/sign-up" underline="always">
                             register here
                         </Link>

@@ -1,6 +1,7 @@
 export interface JWTPayload {
     id: string;
     email: string;
+    role: "owner" | "driver";
     iat: number;
     exp: number;
 }

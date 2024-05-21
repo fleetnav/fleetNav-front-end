@@ -19,3 +19,7 @@ export * from "./trips/TripsPage";
 export * from "./settings/FormEditProfile";
 export * from "./settings/InputsFormEdit";
 export * from "./settings/SelectAvatar";
+
+//chat
+
+export * from "./chat/ChatsPage";

@@ -22,24 +22,51 @@ export class AuthService {
         formData: RegisterForm,
         rol: "owner" | "driver"
     ): Promise<{ data: RegisterResponse; status: number }> {
-        formData["phone"] = Number(formData.phone);
-        formData["role"] = rol;
+        try {
+            formData.phone = Number(formData.phone);
+            formData.role = rol;
 
-        if (rol === "owner") {
-            formData["number_buses"] = 0;
+            rol === "owner" ? this.prepareOwnerData(formData) : await this.prepareDriverData(formData);
+
+            const { data, status } = await this.registerUserApi(formData, rol);
+            return { data, status };
+        } catch (error: any) {
+            console.log(error);
+            throw new Error(error.message || "Error creating user");
+        }
+    }
+
+    private prepareOwnerData(formData: RegisterForm) {
+        formData.number_buses = 0;
+        formData.avatarNumber = 1;
+    }
+
+    private async prepareDriverData(formData: RegisterForm) {
+        if (!formData.id_owner) {
+            throw new Error("Owner ID is required for drivers");
         }
 
+        const { status } = await this.getUserById(formData.id_owner, "owner");
+        if (status === 200) {
+            formData.avatarNumber = 3;
+            formData.status = "inactive";
+            formData.license = Number(formData.license);
+            formData.age = Number(formData.age);
+        } else {
+            throw new Error("The owner ID is not valid");
+        }
+    }
+
+    private async registerUserApi(
+        formData: RegisterForm,
+        rol: string
+    ): Promise<{ data: RegisterResponse; status: number }> {
         try {
-            const { data, status } = await instacheAuth.post<RegisterResponse>("auth/register/owner", {
-                ...formData,
-            });
-            return {
-                data,
-                status,
-            };
-        } catch (error: unknown) {
+            const { data, status } = await instacheAuth.post<RegisterResponse>(`auth/register/${rol}`, formData);
+            return { data, status };
+        } catch (error) {
             console.log(error);
-            throw new Error("error creating user");
+            throw new Error("Error registering user");
         }
     }
 
@@ -62,10 +89,10 @@ export class AuthService {
         }
     }
 
-    async getUserById(id: string): Promise<{ status: number; msg: string }> {
+    async getUserById(id: string, role: "owner" | "driver"): Promise<{ status: number; msg: string }> {
         try {
-            const data = await fetch(`${process.env.NEXT_PUBLIC_AUTH_SERVICE_URL}/owner/${id}`).then((res) =>
-                res.json()
+            const data = await fetch(`${"https://fleetnav-auth-service-0-0-1.onrender.com"}/${role}/${id}`).then(
+                (res) => res.json()
             );
 
             if (data.statusCode) {
