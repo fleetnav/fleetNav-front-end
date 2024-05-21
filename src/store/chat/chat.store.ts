@@ -54,6 +54,7 @@ const store: StateCreator<ChatState> = (set, get) => ({
                     destination: "/app/user.addUser",
                     body: JSON.stringify({ nickName: email, fullName: name, status: "ONLINE" }),
                 });
+
                 chatService.findAndDisplayConnectedUsers(get().setUsers).then();
             },
             onStompError: () => {
