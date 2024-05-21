@@ -6,9 +6,20 @@ export * from "./auth/login/FormLogin";
 
 // ui
 
-export * from "./ui/SideNav";
+export * from "./ui/side-nav/SideNav";
+export * from "./ui/inputController/InputController";
+
+// trucks
+export * from "./trucks/TrucksPage";
+
+// trips
+export * from "./trips/TripsPage";
 
 //Settings
-export * from "./settings/FormEditProfile"
-export * from "./settings/InputsFormEdit"
-export * from "./settings/SelectAvatar"
+export * from "./settings/FormEditProfile";
+export * from "./settings/InputsFormEdit";
+export * from "./settings/SelectAvatar";
+
+//chat
+
+export * from "./chat/ChatsPage";

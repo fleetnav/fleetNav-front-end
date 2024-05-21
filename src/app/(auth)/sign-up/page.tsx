@@ -14,7 +14,7 @@ export default function SignUpPage() {
             <section className="h-dvh w-dvw flex">
                 <div className=" relative w-1/2 h-full">
                     <Image
-                        src={"/images/auth/register-photo.jpg"}
+                        src={"/images/auth/register-photo.webp"}
                         fill
                         alt="register image"
                         className="object-cover object-right"

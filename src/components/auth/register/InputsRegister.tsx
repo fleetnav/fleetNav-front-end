@@ -14,7 +14,6 @@ interface Props {
     isOwner: "owner" | "driver";
 }
 
-const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
 export const InputsRegister = ({ register, errors, isOwner }: Props) => {
     const [isVisible, setIsVisible] = useState(false);
     const [scope, animate] = useAnimate();
@@ -25,13 +24,11 @@ export const InputsRegister = ({ register, errors, isOwner }: Props) => {
         if (isOwner === "owner") {
             return inputsRegisterList.slice(0, 4);
         }
-
         return inputsRegisterList;
     };
 
     useEffect(() => {
         animate(".motion", { opacity: [0, 1] }, { delay: stagger(0.1) });
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOwner]);
 
@@ -63,7 +60,7 @@ export const InputsRegister = ({ register, errors, isOwner }: Props) => {
                         type={input.type === "password" ? (isVisible ? "text" : "password") : input.type}
                         {...register(input.name, {
                             required: true,
-                            pattern: input.patter,
+                            pattern: input?.patter,
                         })}
                     />
                     {/* eslint-disable-next-line react-hooks/exhaustive-deps */}

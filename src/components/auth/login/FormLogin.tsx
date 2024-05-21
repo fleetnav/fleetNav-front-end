@@ -1,9 +1,12 @@
 "use client";
+
 import { useLogin } from "@/hooks";
-import { Button, Input, Link } from "@nextui-org/react";
+import { Button, Link, Tab, Tabs } from "@nextui-org/react";
 import { motion } from "framer-motion";
-import { clsx } from "clsx";
+
 import { InputsLogin } from "./InputsLogin";
+import { useState } from "react";
+type Roles = "owner" | "driver";
 
 export const FormLogin = () => {
     const { register, errors, handleSubmit, onSubmit } = useLogin();
@@ -37,8 +40,9 @@ export const FormLogin = () => {
                 </div>
 
                 <div>
+                    d
                     <span>
-                        don&apos;t have an account ?{" "}
+                        on&apos;t have an account ?{" "}
                         <Link href="/sign-up" underline="always">
                             register here
                         </Link>
