@@ -15,15 +15,18 @@ export async function middleware(request: NextRequest) {
     const authCookie = request.cookies.get("auth-store")?.value;
     const isPrivateRoute = privateRoutes?.includes(pathname);
     const isPublicRoute = publicRoutes?.includes(pathname);
+
     const parsedCookie: { state: StateCookie } = JSON.parse(authCookie ?? "{}");
 
-    if (Object.keys(parsedCookie)?.length === 0 || (Object.keys(parsedCookie?.state)?.length === 0 && isPrivateRoute)) {
-        return NextResponse.redirect(new URL("/login", request.url));
+    if (parsedCookie) {
+        if (Object.keys(parsedCookie)?.length === 0 && isPrivateRoute) {
+            return NextResponse.redirect(new URL("/login", request.url));
+        } else if (Object.keys(parsedCookie?.state ?? "{}")?.length === 0 && isPrivateRoute) {
+            return NextResponse.redirect(new URL("/login", request.url));
+        }
     }
 
     if (parsedCookie?.state?.token && isPrivateRoute) {
-        console.log(parsedCookie.state?.token);
-        console.log("hola");
         const { payload }: DecodedJWT = decodeJWT(parsedCookie.state.token);
 
         const authServ = new AuthService();

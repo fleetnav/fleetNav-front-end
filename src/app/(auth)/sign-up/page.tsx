@@ -7,8 +7,13 @@ export const metadata = {
     title: "sign-up",
     description: "",
 };
+interface Props {
+    searchParams?: { [key: string]: string | undefined };
+}
 
-export default function SignUpPage() {
+export default function SignUpPage({ searchParams }: Props) {
+    const referralCode = searchParams?.referralCode;
+
     return (
         <div>
             <section className="h-dvh w-dvw flex">
@@ -30,7 +35,7 @@ export default function SignUpPage() {
                         <h1 className={`${titleFont.className} text-6xl`}>Create Account</h1>
                     </div>
 
-                    <FormRegister />
+                    <FormRegister referralCode={referralCode} />
                 </section>
             </section>
         </div>
