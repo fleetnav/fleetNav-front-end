@@ -9,8 +9,12 @@ import { InputsRegister } from "./InputsRegister";
 
 type Roles = "owner" | "driver";
 
-export const FormRegister = () => {
-    const [selected, setSelected] = useState<Roles>("owner");
+interface Props {
+    referralCode?: string;
+}
+
+export const FormRegister = ({ referralCode }: Props) => {
+    const [selected, setSelected] = useState<Roles>(referralCode ? "driver" : "owner");
     const { errors, handleSubmit, onSubmit, register } = useRegister({ rol: selected });
 
     return (
@@ -40,7 +44,12 @@ export const FormRegister = () => {
                 </div>
 
                 <div className="h-[52vh]  overflow-y-auto">
-                    <InputsRegister isOwner={selected} register={register} errors={errors} />
+                    <InputsRegister
+                        referralCode={referralCode}
+                        isOwner={selected}
+                        register={register}
+                        errors={errors}
+                    />
                 </div>
 
                 <Button

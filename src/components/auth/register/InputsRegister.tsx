@@ -12,9 +12,10 @@ interface Props {
     register: UseFormRegister<RegisterForm>;
     errors: FieldErrors<any>;
     isOwner: "owner" | "driver";
+    referralCode: string | undefined;
 }
 
-export const InputsRegister = ({ register, errors, isOwner }: Props) => {
+export const InputsRegister = ({ register, errors, isOwner, referralCode }: Props) => {
     const [isVisible, setIsVisible] = useState(false);
     const [scope, animate] = useAnimate();
 
@@ -56,6 +57,7 @@ export const InputsRegister = ({ register, errors, isOwner }: Props) => {
                             )
                         }
                         size="md"
+                        defaultValue={input.name === "id_owner" ? referralCode : ""}
                         label={input.label}
                         type={input.type === "password" ? (isVisible ? "text" : "password") : input.type}
                         {...register(input.name, {

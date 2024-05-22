@@ -1,7 +1,28 @@
+"use client";
 import { Tables } from "@/components/dashboard/Tables";
+import { useAuthStore } from "@/store";
+import { Button } from "@nextui-org/react";
 import Image from "next/image";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function DashboardPage() {
+    const [copyCode, setCopyCode] = useState("");
+    const user = useAuthStore((state) => state.user);
+
+    const url = `https://fleet-nav-front-end.vercel.app/sign-up?referralCode=${user?._id}`;
+
+    const handleCopy = () => {
+        navigator.clipboard
+            .writeText(url)
+            .then(() => {
+                toast.success("Copied to clipboard");
+            })
+            .catch((err) => {
+                toast.error("Error copying to clipboard");
+            });
+    };
+
     return (
         <div className="flex flex-col items-center justify-center gap-8 w-full h-full">
             <div className="w-full h-28 flex items-center justify-center gap-4">
@@ -36,6 +57,11 @@ export default function DashboardPage() {
                     </div>
                 </div>
             </div>
+            {user?._id && (
+                <Button onClick={handleCopy} color="primary" size="lg" radius="sm" className=" h-28 text-black ">
+                    copy referral code
+                </Button>
+            )}
         </div>
     );
 }
